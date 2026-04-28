@@ -209,10 +209,20 @@
   .map-frame-inner::after{bottom:0;left:0;border-width:0 0 2px 2px;}
   .map-frame-inner iframe{width:100%;height:380px;display:block;border:none;filter:saturate(0.6) hue-rotate(260deg) brightness(0.9) contrast(1.1);transition:filter .4s;}
   .map-frame-inner:hover iframe{filter:saturate(1) hue-rotate(0deg) brightness(1) contrast(1);}
-  .map-pin-badge{position:absolute;top:16px;left:16px;z-index:4;background:rgba(58,16,96,.95);backdrop-filter:blur(8px);border:1px solid var(--border-gold);padding:10px 16px;display:flex;align-items:center;gap:10px;}
-  .map-pin-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);animation:pin-pulse 2s ease-in-out infinite;}
-  @keyframes pin-pulse{0%,100%{box-shadow:0 0 4px var(--gold);}50%{box-shadow:0 0 16px var(--gold),0 0 30px rgba(201,168,76,.4);}}
-  .map-pin-text{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-light);font-weight:300;}
+  /* 3D CUSTOM PIN */
+  .map-custom-pin{position:absolute;top:50%;left:50%;transform:translate(-50%,-70%);z-index:10;display:flex;flex-direction:column;align-items:center;pointer-events:none;animation:pin-float 3s ease-in-out infinite;}
+  .map-pin-logo-wrap{position:relative;width:72px;height:72px;}
+  .map-pin-logo-wrap::before{content:'';position:absolute;inset:-6px;border-radius:50%;background:conic-gradient(var(--gold),#fff,var(--gold-light),rgba(200,150,240,1),var(--gold));animation:spin-slow 4s linear infinite;z-index:0;}
+  .map-pin-logo-wrap::after{content:'';position:absolute;inset:-2px;border-radius:50%;background:white;z-index:1;}
+  .map-pin-logo-img{width:72px;height:72px;border-radius:50%;object-fit:cover;position:relative;z-index:2;display:block;}
+  .map-pin-shine{position:absolute;top:4px;left:8px;width:28px;height:20px;background:radial-gradient(ellipse,rgba(255,255,255,.7) 0%,transparent 70%);border-radius:50%;z-index:3;transform:rotate(-30deg);}
+  .map-pin-tail{width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-top:18px solid white;margin-top:-2px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.3));position:relative;z-index:2;}
+  .map-pin-tail::after{content:'';position:absolute;top:-20px;left:-6px;width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:12px solid var(--gold);}
+  .map-pin-shadow{width:30px;height:8px;background:radial-gradient(ellipse,rgba(0,0,0,.35) 0%,transparent 70%);border-radius:50%;margin-top:2px;animation:shadow-pulse 3s ease-in-out infinite;}
+  .map-pin-label{background:rgba(58,16,96,.95);backdrop-filter:blur(8px);border:1px solid var(--border-gold);padding:6px 14px;margin-top:8px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-light);font-weight:300;white-space:nowrap;border-radius:2px;box-shadow:0 4px 20px rgba(0,0,0,.3);}
+  @keyframes pin-float{0%,100%{transform:translate(-50%,-70%) translateY(0);}50%{transform:translate(-50%,-70%) translateY(-8px);}}
+  @keyframes shadow-pulse{0%,100%{transform:scaleX(1);opacity:.6;}50%{transform:scaleX(.7);opacity:.3;}}
+  .map-pin-badge{display:none;}
   .map-cta{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:16px;padding:13px;border:1px solid var(--border-gold);background:rgba(255,255,255,.08);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-light);text-decoration:none;font-weight:300;transition:all .3s;}
   .map-cta:hover{border-color:var(--gold);background:rgba(201,168,76,.15);color:var(--gold);}
 
@@ -440,7 +450,17 @@
     <div class="reveal reveal-delay-2">
       <div class="map-frame-outer">
         <div class="map-frame-inner">
-          <div class="map-pin-badge"><div class="map-pin-dot"></div><span class="map-pin-text">Sempre Bella — Aberto em breve</span></div>
+          <!-- 3D Custom Pin with Logo -->
+          <div class="map-custom-pin">
+            <div class="map-pin-logo-wrap">
+              <img src="logo.png" alt="Sempre Bella" class="map-pin-logo-img"
+                   onerror="this.src='';this.style.background='linear-gradient(135deg,#9B5FCC,#C880E8)';this.style.display='block'">
+              <div class="map-pin-shine"></div>
+            </div>
+            <div class="map-pin-tail"></div>
+            <div class="map-pin-shadow"></div>
+            <div class="map-pin-label">📍 Sempre Bella</div>
+          </div>
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.4!2d-46.7270!3d-23.5250!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cef83b3a3b3b3b%3A0x0!2sRua%20Cotiguara%2C%2010%20-%20Jardim%20Rosinhas%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2005274-080!5e0!3m2!1spt-BR!2sbr!4v1699999999999!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Localização Sempre Bella"></iframe>
         </div>
         <a href="https://maps.google.com/?q=Rua+Cotiguara,10+Jardim+Rosinhas+São+Paulo" target="_blank" class="map-cta">🗺️ &nbsp;Abrir no Google Maps</a>
