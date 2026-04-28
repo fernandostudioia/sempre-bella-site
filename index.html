@@ -175,14 +175,150 @@
   .cat-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:var(--cream);line-height:1.1;}
   .cat-card:first-child .cat-title{font-size:44px;}
 
-  .proof{padding:100px 60px;background:var(--bg-mid);position:relative;overflow:hidden;}
+  /* PROOF SECTION — PREMIUM MOBILE FIRST */
+  .proof{padding:80px 20px;background:var(--bg-mid);position:relative;overflow:hidden;}
   .proof::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
-  .proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;max-width:1100px;margin:0 auto;}
-  .proof-card{padding:36px;border:1px solid var(--border);background:var(--bg-card);transition:border-color .3s,transform .3s;}
-  .proof-card:hover{border-color:var(--border-gold);transform:translateY(-4px);}
-  .proof-stars{color:var(--gold-light);font-size:13px;letter-spacing:3px;margin-bottom:18px;}
-  .proof-text{font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:var(--cream);line-height:1.65;margin-bottom:20px;opacity:.9;}
-  .proof-name{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-light);font-weight:300;}
+
+  /* Glitter bg */
+  .proof-glitter{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle,rgba(201,168,76,.4) 1px,transparent 1px);background-size:60px 60px;opacity:.1;}
+
+  .proof-grid{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    max-width:1100px;
+    margin:0 auto;
+  }
+
+  /* CARD BASE */
+  .proof-card{
+    position:relative;
+    padding:32px 28px 28px;
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.07);
+    overflow:hidden;
+    transition:transform .3s ease, border-color .3s ease;
+  }
+  .proof-card:hover{transform:translateY(-4px);}
+
+  /* Animated gradient border on featured card */
+  .proof-card.featured{
+    border:2px solid transparent;
+    background-clip:padding-box;
+    position:relative;
+  }
+  .proof-card.featured::before{
+    content:'';
+    position:absolute;
+    inset:-2px;
+    border-radius:inherit;
+    background:conic-gradient(var(--gold),rgba(200,150,240,1),var(--gold-light),var(--magenta),var(--gold));
+    z-index:-1;
+    animation:spin-slow 4s linear infinite;
+  }
+  .proof-card.featured::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:rgba(123,63,160,.85);
+    z-index:-1;
+  }
+
+  /* Big decorative quote mark */
+  .proof-quote-mark{
+    font-family:'Cormorant Garamond',serif;
+    font-size:96px;
+    line-height:.8;
+    color:rgba(201,168,76,.2);
+    position:absolute;
+    top:8px; left:16px;
+    pointer-events:none;
+    font-style:italic;
+  }
+
+  /* Stars */
+  .proof-stars{
+    color:var(--gold-light);
+    font-size:14px;
+    letter-spacing:3px;
+    margin-bottom:16px;
+    position:relative;
+    z-index:1;
+  }
+
+  /* Text */
+  .proof-text{
+    font-family:'Cormorant Garamond',serif;
+    font-size:18px;
+    font-style:italic;
+    color:var(--cream);
+    line-height:1.65;
+    margin-bottom:24px;
+    position:relative;
+    z-index:1;
+    opacity:.92;
+  }
+
+  /* Author row */
+  .proof-author-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    position:relative;
+    z-index:1;
+  }
+  .proof-avatar{
+    width:44px;height:44px;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--purple),var(--magenta));
+    border:2px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Cormorant Garamond',serif;
+    font-size:18px;font-weight:600;
+    color:white;
+    flex-shrink:0;
+    box-shadow:0 0 12px rgba(201,168,76,.3);
+  }
+  .proof-author-info{}
+  .proof-name{
+    font-size:11px;letter-spacing:3px;text-transform:uppercase;
+    color:var(--gold-light);font-weight:400;margin-bottom:2px;
+  }
+  .proof-verified{
+    display:inline-flex;align-items:center;gap:4px;
+    font-size:9px;letter-spacing:2px;text-transform:uppercase;
+    color:rgba(255,255,255,.45);font-weight:300;
+  }
+  .proof-verified-icon{
+    width:12px;height:12px;
+    background:var(--gold);
+    border-radius:50%;
+    display:inline-flex;align-items:center;justify-content:center;
+    font-size:7px;color:var(--dark);
+  }
+
+  /* Floating star particles inside card */
+  .proof-particle{
+    position:absolute;
+    font-size:10px;
+    opacity:0;
+    pointer-events:none;
+    animation:proof-star-float linear infinite;
+    color:var(--gold-light);
+  }
+  @keyframes proof-star-float{
+    0%  {opacity:0;transform:translateY(20px) scale(0);}
+    20% {opacity:.7;}
+    80% {opacity:.3;}
+    100%{opacity:0;transform:translateY(-60px) scale(1.2);}
+  }
+
+  /* DESKTOP: side by side */
+  @media(min-width:901px){
+    .proof{padding:100px 60px;}
+    .proof-grid{flex-direction:row;gap:24px;}
+    .proof-card{flex:1;}
+  }
 
   .location-section{padding:100px 60px;background:linear-gradient(180deg,var(--bg-dark) 0%,var(--bg-mid) 100%);position:relative;overflow:hidden;}
   .location-section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
@@ -425,12 +561,50 @@
 </section>
 
 <section class="proof">
+  <div class="proof-glitter"></div>
   <p class="section-label reveal">Quem já conhece, ama</p>
   <h2 class="section-title reveal">O que dizem <em>nossas clientes</em></h2>
   <div class="proof-grid">
-    <div class="proof-card reveal reveal-delay-1"><div class="proof-stars">★★★★★</div><p class="proof-text">"Produtos incríveis e atendimento super atencioso. Encontrei exatamente o que precisava para o meu dia a dia!"</p><p class="proof-name">— Ana Luiza M.</p></div>
-    <div class="proof-card reveal reveal-delay-2"><div class="proof-stars">★★★★★</div><p class="proof-text">"Qualidade excelente nos produtos capilares. Meu cabelo nunca esteve tão hidratado. Super recomendo!"</p><p class="proof-name">— Camila R.</p></div>
-    <div class="proof-card reveal reveal-delay-3"><div class="proof-stars">★★★★★</div><p class="proof-text">"Fiz minha encomenda pelo WhatsApp e foi rapidíssimo. Amei os cílios e já pedi mais!"</p><p class="proof-name">— Priscila T.</p></div>
+
+    <div class="proof-card reveal reveal-delay-1">
+      <div class="proof-quote-mark">"</div>
+      <div class="proof-stars">★★★★★</div>
+      <p class="proof-text">Produtos incríveis e atendimento super atencioso. Encontrei exatamente o que precisava para o meu dia a dia!</p>
+      <div class="proof-author-row">
+        <div class="proof-avatar">A</div>
+        <div class="proof-author-info">
+          <p class="proof-name">Ana Luiza M.</p>
+          <span class="proof-verified"><span class="proof-verified-icon">✓</span> Cliente verificada</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="proof-card featured reveal reveal-delay-2">
+      <div class="proof-quote-mark">"</div>
+      <div class="proof-stars">★★★★★</div>
+      <p class="proof-text">Qualidade excelente nos produtos capilares. Meu cabelo nunca esteve tão hidratado. Super recomendo!</p>
+      <div class="proof-author-row">
+        <div class="proof-avatar" style="background:linear-gradient(135deg,var(--gold),var(--magenta));">C</div>
+        <div class="proof-author-info">
+          <p class="proof-name">Camila R.</p>
+          <span class="proof-verified"><span class="proof-verified-icon">✓</span> Cliente verificada</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="proof-card reveal reveal-delay-3">
+      <div class="proof-quote-mark">"</div>
+      <div class="proof-stars">★★★★★</div>
+      <p class="proof-text">Fiz minha encomenda pelo WhatsApp e foi rapidíssimo. Amei os cílios e já pedi mais!</p>
+      <div class="proof-author-row">
+        <div class="proof-avatar" style="background:linear-gradient(135deg,var(--magenta),var(--purple-light));">P</div>
+        <div class="proof-author-info">
+          <p class="proof-name">Priscila T.</p>
+          <span class="proof-verified"><span class="proof-verified-icon">✓</span> Cliente verificada</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -461,9 +635,9 @@
             <div class="map-pin-shadow"></div>
             <div class="map-pin-label">📍 Sempre Bella</div>
           </div>
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.4!2d-46.7270!3d-23.5250!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cef83b3a3b3b3b%3A0x0!2sRua%20Cotiguara%2C%2010%20-%20Jardim%20Rosinhas%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2005274-080!5e0!3m2!1spt-BR!2sbr!4v1699999999999!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Localização Sempre Bella"></iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d457.57353820407354!2d-46.801895821411755!3d-23.43923458264237!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sRua%20Cotiguara%2C%2010%20-%20Jardim%20Rosinhas%2C%20S%C3%A3o%20Paulo!5e0!3m2!1spt-BR!2sbr!4v1777410735238!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Localização Sempre Bella"></iframe>
         </div>
-        <a href="https://maps.google.com/?q=Rua+Cotiguara,10+Jardim+Rosinhas+São+Paulo" target="_blank" class="map-cta">🗺️ &nbsp;Abrir no Google Maps</a>
+        <a href="https://www.google.com/maps/search/Rua+Cotiguara,+10+-+Jardim+Rosinhas,+São+Paulo/@-23.4392346,-46.8018958" target="_blank" class="map-cta">🗺️ &nbsp;Abrir no Google Maps</a>
       </div>
     </div>
   </div>
@@ -535,6 +709,17 @@
   window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60));
   const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:.08,rootMargin:'0px 0px -50px 0px'});
   document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  // PROOF CARD PARTICLES
+  document.querySelectorAll('.proof-card').forEach(card=>{
+    for(let i=0;i<5;i++){
+      const s=document.createElement('div');
+      s.className='proof-particle';
+      s.textContent='✦';
+      s.style.cssText=`left:${10+Math.random()*80}%;bottom:${Math.random()*30}%;animation-duration:${3+Math.random()*4}s;animation-delay:${Math.random()*4}s;font-size:${8+Math.random()*8}px;`;
+      card.appendChild(s);
+    }
+  });
+  // HERO PARALLAX
   document.addEventListener('mousemove',e=>{
     const v=document.querySelector('.hero-visual');
     if(!v)return;
