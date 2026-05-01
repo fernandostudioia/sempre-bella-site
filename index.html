@@ -102,6 +102,40 @@
   .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4.5vw,58px);font-weight:300;text-align:center;line-height:1.1;margin-bottom:70px;color:var(--cream);}
   .section-title em{font-style:italic;color:var(--gold-light);}
 
+  /* GALLERY SECTION */
+  .gallery-section{padding:80px 0;background:var(--bg-dark);overflow:hidden;position:relative;}
+  .gallery-section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+  .gallery-section::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+  .gallery-header{text-align:center;padding:0 20px 40px;}
+  .gallery-hero{position:relative;overflow:hidden;height:320px;margin:0 20px 14px;cursor:zoom-in;}
+  .gallery-hero img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .6s ease;display:block;}
+  .gallery-hero:hover img{transform:scale(1.05);}
+  .gallery-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(58,16,96,.85) 0%,transparent 50%);display:flex;align-items:flex-end;padding:24px;}
+  .gallery-hero-label{font-family:'Cormorant Garamond',serif;font-size:26px;font-style:italic;color:var(--cream);display:flex;align-items:center;gap:12px;}
+  .gallery-hero-label::before{content:'';width:30px;height:1px;background:var(--gold);}
+  .gallery-strip{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:14px;padding:0 20px 20px;scrollbar-width:none;}
+  .gallery-strip::-webkit-scrollbar{display:none;}
+  .gallery-thumb{flex:0 0 72vw;max-width:320px;height:240px;scroll-snap-align:start;position:relative;overflow:hidden;flex-shrink:0;cursor:zoom-in;}
+  .gallery-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;display:block;}
+  .gallery-thumb:hover img{transform:scale(1.08);}
+  .gallery-thumb-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(58,16,96,.8) 0%,transparent 50%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:16px;}
+  .gallery-thumb:hover .gallery-thumb-overlay{opacity:1;}
+  .gallery-thumb-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-light);font-weight:300;}
+  .gallery-hint{text-align:center;padding:8px 0 0;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.3);font-weight:300;display:flex;align-items:center;justify-content:center;gap:8px;}
+  .gallery-hint::before,.gallery-hint::after{content:'';width:24px;height:1px;background:rgba(255,255,255,.15);}
+  .lightbox{position:fixed;inset:0;z-index:999;background:rgba(26,8,48,.96);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;}
+  .lightbox.open{opacity:1;pointer-events:all;}
+  .lightbox img{max-width:90vw;max-height:85vh;object-fit:contain;border:1px solid var(--border-gold);box-shadow:0 0 80px rgba(58,16,96,.8);}
+  .lightbox-close{position:absolute;top:20px;right:24px;font-size:36px;color:var(--gold-light);cursor:pointer;background:none;border:none;font-family:'Cormorant Garamond',serif;transition:color .3s;line-height:1;}
+  .lightbox-close:hover{color:var(--cream);}
+  @media(min-width:901px){
+    .gallery-section{padding:100px 60px;}
+    .gallery-hero{height:460px;margin:0 0 20px;}
+    .gallery-strip{display:grid;grid-template-columns:repeat(4,1fr);overflow:visible;padding:0;gap:20px;}
+    .gallery-thumb{flex:none;max-width:none;height:260px;scroll-snap-align:none;}
+    .gallery-hint{display:none;}
+  }
+
   .brand-intro-section{background:linear-gradient(180deg,var(--bg-main) 0%,var(--bg-mid) 100%);position:relative;overflow:hidden;}
   .brand-intro-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 30% 50%,rgba(255,255,255,.05) 0%,transparent 70%);pointer-events:none;}
   .brand-intro{padding:100px 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1200px;margin:0 auto;position:relative;z-index:1;}
@@ -555,6 +589,7 @@
   </a>
   <ul class="nav-links">
     <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#galeria">Galeria</a></li>
     <li><a href="#produtos">Produtos</a></li>
     <li><a href="#categorias">Categorias</a></li>
     <li><a href="#localizacao">Localização</a></li>
@@ -591,6 +626,50 @@
     <span class="marquee-item">Maquiagem Premium</span><span class="marquee-item">Cosméticos Capilares</span><span class="marquee-item">Acessórios Femininos</span><span class="marquee-item">Cílios Profissionais</span><span class="marquee-item">Lip Gloss & Batom</span><span class="marquee-item">Cuidados Pessoais</span><span class="marquee-item">Novidades Toda Semana</span>
     <span class="marquee-item">Maquiagem Premium</span><span class="marquee-item">Cosméticos Capilares</span><span class="marquee-item">Acessórios Femininos</span><span class="marquee-item">Cílios Profissionais</span><span class="marquee-item">Lip Gloss & Batom</span><span class="marquee-item">Cuidados Pessoais</span><span class="marquee-item">Novidades Toda Semana</span>
   </div>
+</div>
+
+<!-- GALLERY -->
+<section class="gallery-section" id="galeria">
+  <div class="gallery-header reveal">
+    <p class="section-label">Nossa Loja</p>
+    <h2 class="section-title" style="margin-bottom:0;">Conheça a <em>Sempre Bella</em></h2>
+  </div>
+
+  <!-- Fachada — destaque -->
+  <div class="gallery-hero reveal" onclick="openLightbox('fachada.jpg')">
+    <img src="fachada.jpg" alt="Fachada Sempre Bella" loading="lazy">
+    <div class="gallery-hero-overlay">
+      <div class="gallery-hero-label">Nossa fachada exclusiva</div>
+    </div>
+  </div>
+
+  <!-- Interior — carrossel mobile / grid desktop -->
+  <div class="gallery-strip">
+    <div class="gallery-thumb reveal reveal-delay-1" onclick="openLightbox('loja-1.jpg')">
+      <img src="loja-1.jpg" alt="Interior — Cosméticos" loading="lazy">
+      <div class="gallery-thumb-overlay"><span class="gallery-thumb-label">Cosméticos & Capilares</span></div>
+    </div>
+    <div class="gallery-thumb reveal reveal-delay-2" onclick="openLightbox('loja-2.jpg')">
+      <img src="loja-2.jpg" alt="Interior — Maquiagem" loading="lazy">
+      <div class="gallery-thumb-overlay"><span class="gallery-thumb-label">Maquiagem</span></div>
+    </div>
+    <div class="gallery-thumb reveal reveal-delay-3" onclick="openLightbox('loja-3.jpg')">
+      <img src="loja-3.jpg" alt="Interior — Produtos" loading="lazy">
+      <div class="gallery-thumb-overlay"><span class="gallery-thumb-label">Linha Completa</span></div>
+    </div>
+    <div class="gallery-thumb reveal reveal-delay-1" onclick="openLightbox('loja-4.jpg')">
+      <img src="loja-4.jpg" alt="Cartão Sempre Bella" loading="lazy">
+      <div class="gallery-thumb-overlay"><span class="gallery-thumb-label">Nossa Marca</span></div>
+    </div>
+  </div>
+
+  <p class="gallery-hint">Deslize para ver mais</p>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">×</button>
+  <img id="lightboxImg" src="" alt="Foto da loja">
 </div>
 
 <section class="brand-intro-section" id="sobre">
@@ -871,6 +950,18 @@
   new IntersectionObserver(entries=>{
     entries.forEach(e=>{if(e.isIntersecting)e.target.querySelectorAll('.stat-num[data-target]').forEach(animateCounter);});
   },{threshold:.3}).observe(document.getElementById('statsBar')||document.body);
+
+  // LIGHTBOX
+  function openLightbox(src){
+    document.getElementById('lightboxImg').src=src;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function closeLightbox(){
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow='';
+  }
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
 
   // HERO PARALLAX
   document.addEventListener('mousemove',e=>{
